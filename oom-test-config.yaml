@@ -1,0 +1,37 @@
+config:
+    # WARNING: `configVersion` indicates the schema version of the config file.
+    # This value tells RapiDAST what schema should be used to read this configuration.
+    # Therefore you should only change it if you update the configuration to a newer schema
+    # It is intended to keep backward compatibility (newer RapiDAST running an older config)
+    configVersion: 4
+    defectDojo:
+        url: "http://localhost"
+
+# `application` contains data related to the application, not to the scans.
+application:
+  shortName: "MyApp-1.0"
+  url: "http://localhost:5000"
+
+# `general` is a section that will be applied to all scanners.
+general:
+
+    container:
+        # currently supported: `podman` and `none`
+        type: "none"
+
+scanners:
+    zap:
+    # define a scan through the ZAP scanner
+        apiScan:
+            apis:
+                apiUrl: "https://raw.githubusercontent.com/jeremychoi/test/main/api-core-v1-openapi.json"
+
+        passiveScan:
+            # optional list of passive rules to disable
+            disabledRules: "2,10015,10027,10096,10024"
+
+#        activeScan:
+#            # If no policy is chosen, a default ("API-scan-minimal") will be selected
+#            # The list of policies can be found in scanners/zap/policies/
+#            policy: "API-scan-minimal"
+
